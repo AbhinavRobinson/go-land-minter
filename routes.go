@@ -10,10 +10,10 @@ func setupRoutes(app *fiber.App) {
 	sale := minter.Group("/sale")   // /minter/sale
 
 	// Add Ping routes
-	minter.Get("/", ping) 			  // pongs /minter
-	token.Get("/", ping)  			  // pongs /minter/token
-	land.Get("/", ping)   			  // pongs /minter/land
-	sale.Get("/", ping)   			  // pongs /minter/sale
+	minter.Get("/", ping) 	// pongs /minter
+	token.Get("/", ping)  	// pongs /minter/token
+	land.Get("/", ping)   	// pongs /minter/land
+	sale.Get("/", ping)   	// pongs /minter/sale
 }
 
 func ping(c *fiber.Ctx) error {

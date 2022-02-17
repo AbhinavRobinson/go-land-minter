@@ -19,6 +19,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Some error occured. Err: %s", err)
 	}
+	// Load Contracts
+	setupContracts()
 	// Load Fiber
 	app := fiber.New()
 	// Middlewares
