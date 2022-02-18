@@ -32,9 +32,5 @@ func main() {
 	// Listen
 	host := os.Getenv("HOST")
 	port := os.Getenv("PORT")
-	err = app.Listen(fmt.Sprintf("%s:%s", host, port))
-	// Catch error (should not happen)
-	if err != nil {
-		return
-	}
+	_ = app.Listen(fmt.Sprintf("%s:%s", host, port))
 }
