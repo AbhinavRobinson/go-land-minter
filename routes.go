@@ -19,9 +19,13 @@ func setupRoutes(app *fiber.App) {
 	_token.Get("/:address", getAddress)
 }
 
+// UTILS
+
 func ping(c *fiber.Ctx) error {
 	return c.SendString(pong(c.Route().Path))
 }
+
+// TOKEN
 
 func getAddress(c *fiber.Ctx) error {
 	res, err := getBalance(c.Params("address"))
@@ -30,3 +34,7 @@ func getAddress(c *fiber.Ctx) error {
 	}
 	return c.SendString(res)
 }
+
+// LAND
+
+// SALE
