@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/go-minter.iml" filepath="$PROJECT_DIR$/.idea/go-minter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/go_minter.iml" filepath="$PROJECT_DIR$/.idea/go_minter.iml" />
     </modules>
   </component>
 </project>
