@@ -18,6 +18,11 @@ func getBalance(address string) (string, error) {
 	return balance.String(), err
 }
 
+func getAllowance(owner string, spender string) (string, error) {
+	allowance, err := token.Allowance(callOpts, common.HexToAddress(owner), common.HexToAddress(spender))
+	return allowance.String(), err
+}
+
 // LAND
 
 // SALE

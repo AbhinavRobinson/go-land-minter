@@ -16,7 +16,7 @@ func setupRoutes(app *fiber.App) {
 	_sale.Get("/", ping)   // pongs /minter/sale
 
 	// Token
-	_token.Get("/:address", getAddress)
+	_token.Get("/:address", getBalanceOfAddress)
 }
 
 // UTILS
@@ -27,8 +27,16 @@ func ping(c *fiber.Ctx) error {
 
 // TOKEN
 
-func getAddress(c *fiber.Ctx) error {
+func getBalanceOfAddress(c *fiber.Ctx) error {
 	res, err := getBalance(c.Params("address"))
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+	return c.SendString(res)
+}
+
+func getAllowanceForAddress(c *fiber.Ctx) error {
+	res, err := getAllowance(c.Params("owner"), c.Params("spender"))
 	if err != nil {
 		return c.SendString(err.Error())
 	}
