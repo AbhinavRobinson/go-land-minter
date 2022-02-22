@@ -1,28 +1,54 @@
 package main
 
 import (
-	"fmt"
-	"github.com/ethereum/go-ethereum/common"
+	"encoding/json"
+	"github.com/gofiber/fiber/v2"
 )
 
 // UTILS
 
-func pong(route string) string {
-	return fmt.Sprintf("%s\n", route)
+func ping(c *fiber.Ctx) error {
+	return c.SendString(_pong(c.Route().Path))
 }
 
 // TOKEN
 
-func getBalance(address string) (string, error) {
-	balance, err := token.BalanceOf(callOpts, common.HexToAddress(address))
-	return balance.String(), err
+func getBalanceOfAddress(c *fiber.Ctx) error {
+	res, err := _getBalance(c.Params("addr"))
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+	return c.SendString(res)
 }
 
-func getAllowance(owner string, spender string) (string, error) {
-	allowance, err := token.Allowance(callOpts, common.HexToAddress(owner), common.HexToAddress(spender))
-	return allowance.String(), err
+func getAllowanceForAddress(c *fiber.Ctx) error {
+	res, err := _getAllowance(c.Params("from"), c.Params("to"))
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+	return c.SendString(res)
 }
 
 // LAND
 
+func getLandOwner(c *fiber.Ctx) error {
+	res, err := _getLandOwner(c.Params("id"))
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+	return c.SendString(res)
+}
+
 // SALE
+
+func getSaleById(c *fiber.Ctx) error {
+	res, err := _getSaleById(c.Params("id"))
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+	resp, err := json.Marshal(res)
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+	return c.SendString(string(resp))
+}

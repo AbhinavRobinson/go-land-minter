@@ -18,8 +18,6 @@ var token *TOKEN.Token
 var land *LAND.Main
 var sale *SALE.Main
 
-var cl *ethclient.Client
-
 var ctx = context.Background()
 var callOpts = &bind.CallOpts{Context: ctx, Pending: false}
 
@@ -28,32 +26,32 @@ func setupContracts() {
 	tokenAddress := common.HexToAddress("4E0732efCdF0Cf92C48439535CD763de06FE353a")
 	landAddress := common.HexToAddress("5f1994949073dA9252D79ee53e3C91255Dc90070")
 	saleAddress := common.HexToAddress("751d2375C2Db72Af22350Db58c3F44a89F03e08c")
+	var err error
 
 	// INIT ETH CLIENT
 
-	client, errClient := ethclient.Dial(provider)
-	if errClient != nil {
-		log.Fatalf("Error connecting to client: %s", errClient)
+	client, err := ethclient.Dial(provider)
+	if err != nil {
+		log.Fatalf("Error connecting to client: %s", err)
 	}
-	cl = client
 
 	// LOAD CONTRACTS
 
-	t, errToken := TOKEN.NewToken(tokenAddress, client)
-	if errToken != nil {
-		log.Fatalf("Some error occurred in TOKEN. Err: %s", errToken)
+	t, err := TOKEN.NewToken(tokenAddress, client)
+	if err != nil {
+		log.Fatalf("Some error occurred in TOKEN. Err: %s", err)
 	}
 	token = t
 
-	l, errLand := LAND.NewMain(landAddress, client)
-	if errLand != nil {
-		log.Fatalf("Some error occurred in LAND. Err: %s", errLand)
+	l, err := LAND.NewMain(landAddress, client)
+	if err != nil {
+		log.Fatalf("Some error occurred in LAND. Err: %s", err)
 	}
 	land = l
 
-	s, errSale := SALE.NewMain(saleAddress, client)
-	if errSale != nil {
-		log.Fatalf("Some error occurred in SALE. Err: %s", errSale)
+	s, err := SALE.NewMain(saleAddress, client)
+	if err != nil {
+		log.Fatalf("Some error occurred in SALE. Err: %s", err)
 	}
 	sale = s
 
