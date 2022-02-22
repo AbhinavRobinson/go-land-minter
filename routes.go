@@ -15,6 +15,8 @@ func setupRoutes(app *fiber.App) {
 
 	// Land
 	_land.Get("/owner/:id", getLandOwner)
+	_land.Get("/id/:x/:y", getLandId)
+	_land.Get("/coordinates/:id", getLandCoordinates)
 
 	// Sale
 	_sale.Get("/status/:id", getSaleById)

@@ -36,6 +36,29 @@ func _getLandOwner(landIdString string) (string, error) {
 	return owner.String(), err
 }
 
+func _getLandId(xCoordinate string, yCoordinate string) (string, error) {
+	x, ok := new(big.Int).SetString(xCoordinate, 10)
+	if !ok {
+		return "", fmt.Errorf("invalid xCoordinate")
+	}
+	y, ok := new(big.Int).SetString(yCoordinate, 10)
+	if !ok {
+		return "", fmt.Errorf("invalid yCoordinate")
+	}
+	landId, err := land.GetIdFromCoordinates(callOpts, x, y)
+	return landId.String(), err
+}
+
+func _getLandCoordinates(landIdString string) (Coordinates, error) {
+	landId := new(big.Int)
+	landId, ok := landId.SetString(landIdString, 10)
+	if !ok {
+		return Coordinates{nil,nil}, fmt.Errorf("invalid landId")
+	}
+	x, y, err := land.GetCoordinatesFromId(callOpts, landId)
+	return Coordinates{x,y}, err
+}
+
 // SALE
 
 func _getSaleById(saleIdString string) (Sale, error) {

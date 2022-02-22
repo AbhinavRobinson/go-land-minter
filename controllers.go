@@ -39,6 +39,26 @@ func getLandOwner(c *fiber.Ctx) error {
 	return c.SendString(res)
 }
 
+func getLandId(c *fiber.Ctx) error {
+	res, err := _getLandId(c.Params("x"), c.Params("y"))
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+	return c.SendString(res)
+}
+
+func getLandCoordinates(c *fiber.Ctx) error {
+	res, err := _getLandCoordinates(c.Params("id"))
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+	resp, err := json.Marshal(res)
+	if err != nil {
+		return c.SendString(err.Error())
+	}
+	return c.SendString(string(resp))
+}
+
 // SALE
 
 func getSaleById(c *fiber.Ctx) error {
